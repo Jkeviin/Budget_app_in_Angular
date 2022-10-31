@@ -1,7 +1,9 @@
-<form>
+<form (ngSubmit)="f.form.valid && agregarValor()" #f="ngForm">
+  <!-- #f="ngForm" es para poder acceder al formulario desde el componente -->
+  <!-- f.form.valid es para validar el formulario -->
   <div class="agregar">
     <div class="agregar_contenedor">
-      <select class="agregar_tipo" (change)="tipoOperacion($event)">
+      <select class="agregar_tipo" (change)="tipoOperacion($event)" [ngClass]="{'redfocus': tipo === 'egresoOperacion'}">
         <option value="ingresoOperacion" selected>+</option>
         <option value="egresoOperacion">-</option>
       </select>
@@ -11,7 +13,7 @@
         class="agregar_descripcion"
         placeholder="Agregar Descripción"
         name="descripcion"
-        [(ngModel)]="descripcionInput"
+        [(ngModel)]="descripcionInput" required
       />
       <input
         [ngClass]="{'redfocus': tipo === 'egresoOperacion'}"
@@ -19,8 +21,8 @@
         class="agregar_valor"
         placeholder="Valor"
         name="valor"
-        [(ngModel)]="valorInput"/>
-      <button class="agregar_btn" type="submit" (click)="agregarValor()">
+        [(ngModel)]="valorInput" required/>
+      <button class="agregar_btn" type="submit">
         <i [ngClass]="{'red': tipo === 'egresoOperacion'}" class="ion-ios-checkmark-outline"></i>
       </button>
     </div>
